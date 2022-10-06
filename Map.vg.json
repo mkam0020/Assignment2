@@ -7,10 +7,10 @@
   "layer": [
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m_ocean.json",
+        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m.json",
         "format": {"type": "topojson", "feature": "ne_110m_ocean"}
       },
-      "mark": {"type": "geoshape", "fill": "lightblue"}
+      "mark": {"type": "geoshape", "fill":"lightblue"}
     },
     {
       "data": {
