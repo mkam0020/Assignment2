@@ -1,4 +1,4 @@
-name,id,nametype,recclass,mass(g),fall,year,reclat,reclong,GeoLocation
+name,id,nametype,recclass,mass_gram,fall,year,reclat,reclong,GeoLocation
 Dhofar 1170,33873,Valid,Ureilite,501,Found,2005,19.218111,54.917417,"(19.218111, 54.917417)"
 Dhofar 314,7097,Valid,L6,501,Found,2001,19.31833,54.73,"(19.31833, 54.73)"
 Jiddat al Harasis 381,51648,Valid,H~5,501,Found,2003,19.30747,55.69782,"(19.30747, 55.69782)"

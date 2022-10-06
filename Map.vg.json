@@ -32,17 +32,17 @@
         "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
       },
       "transform": [
-        {"calculate":"datum.mass(g)/1000", "as": "mass"}
+        {"calculate":"datum.mass_gram/1000", "as": "mass"}
       ],
       "mark": "circle",
       "encoding": {
         "tooltip":[
-          {"field": "mass (g)", "type": "quantitative"}
+          {"field": "mass", "type": "quantitative"}
         ],
         "longitude": {"field": "reclong", "type": "quantitative"},
         "latitude": {"field": "reclat", "type": "quantitative"},
         "size": {
-          "field": "mass (g)",
+          "field": "mass",
           "type": "quantitative",
           "title": "Mass (g)",
           "scale": {"domain": [5000,10000000]}
