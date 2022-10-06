@@ -32,7 +32,7 @@
         "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
       },
       "transform": [
-        {"calculate":"datum.mass_gram/1000", "as": "mass"}
+        {"calculate":"datum.massg/1000", "as": "mass"}
       ],
       "mark": "circle",
       "encoding": {
