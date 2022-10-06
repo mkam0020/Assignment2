@@ -30,8 +30,13 @@
           "size": {
             "field": "mass (g)",
             "type": "quantitative",
-            "title": "Magnitude (Richter scale)",
-            "scale": {"domain": [500, 60000000]}
+            "title": "Mass (g)",
+            "scale": {}
+          },
+          "color":{
+            "field": "mass (g)",
+            "type": "quantitative",
+            "scale": {"type": "log"}
           }
         }
       }
