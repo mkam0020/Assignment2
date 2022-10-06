@@ -4,6 +4,7 @@
   "height": 450,
   "title": "Meterorite larger than 0.5 kg",
   "projection": {"type": "equalEarth"},
+  "background":"aliceblue",
   "layer": [
     {
       "data": {
@@ -28,10 +29,10 @@
         "longitude": {"field": "reclong", "type": "quantitative"},
         "latitude": {"field": "reclat", "type": "quantitative"},
         "size": {
-          "field": "mass",
+          "field": "mass (g)",
           "type": "quantitative",
           "title": "Mass",
-          "scale": {"domain": [0.5,10000]}
+          "scale": {"domain": [5000,10000000]}
         }
       }
     }
