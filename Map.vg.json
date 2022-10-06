@@ -4,8 +4,14 @@
   "height": 450,
   "title": "Meterorite larger than 0.5 kg",
   "projection": {"type": "equalEarth"},
-  "background":"aliceblue",
   "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m_ocean.json",
+        "format": {"type": "topojson", "feature": "ne_110m_ocean"}
+      },
+      "mark": {"type": "geoshape", "fill": "lightblue"}
+    },
     {
       "data": {
         "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m.json",
@@ -20,6 +26,7 @@
       },
       "mark": {"type": "geoshape", "fill": null, "stroke": "black"}
     },
+
     {
       "data": {
         "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
