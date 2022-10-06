@@ -4,10 +4,11 @@
     "height": 450,
     "title": "Meterorite larger than 0.5 kg",
     "data": {
-        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
+        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/NumMeteorLandingsPerYear.csv"
     },
     "mark": "bar",
     "encoding": {
-        "x": {"field": "year", "type": "quantitative"}
+        "x": {"field": "year", "type": "ordinal"},
+        "y": {"field": "count", "type": "quantitative"}
     }
 }
