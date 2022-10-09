@@ -49,13 +49,13 @@
           "field": "mass",
           "type": "quantitative",
           "title": "Mass (kg)",
-          "scale": {"domain": [1,10000],"type": "log"}
+          "scale": {"domain":[0.5,60000],"type": "log"}
         },
         "size":{
           "field": "mass",
           "type": "quantitative",
           "title": "Mass (kg)",
-          "scale": {"domain": [1,10000]}
+          "scale": {"domain":[0.5,60000]}
         }
       }
     }

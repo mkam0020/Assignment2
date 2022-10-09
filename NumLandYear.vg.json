@@ -1,19 +1,65 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 800,
-    "height": 450,
-    "title": "Meterorite larger than 0.5 kg",
-    "data": {
-      "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 450,
+  "title": "Meterorite larger than 0.5 kg",
+  "data": {
+    "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "yearrange",
+          "select": {"type": "point", "fields": ["end", "start"]},
+          "bind": {
+            "end": {
+              "input": "range",
+              "min": 1350,
+              "max": 2013,
+              "step": 1,
+              "name": "End Year"
+            },
+            "start": {
+              "input": "range",
+              "min": 1350,
+              "max": 2013,
+              "step": 1,
+              "name": "Start Year"
+            }
+          },
+          "value": [{"start": 1350, "end": 2013}]
+        }
+      ],
+      "transform": [
+        {"filter": "datum.year>yearrange_start"},
+        {"filter": "datum.year<yearrange_end"}
+      ],
+      "mark": "line",
+      "encoding": {
+        "x": {"field": "year", "type": "quantitative", "title": "Year"},
+        "y": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Number of Meteorites Landings"
+        },
+        "color": {"value": "#17becf"},
+        "tooltip": [
+          {"field": "year", "type": "quantitative", "title": "Year"},
+          {
+            "aggregate": "count",
+            "type": "quantitative",
+            "title": "No. Meteorites"
+          }
+        ]
+      }
     },
-    "mark": "bar",
-    "encoding": {
-      "x": {"field": "year", "type": "quantitative"},
-      "y": {"aggregate": "count", "type": "quantitative"},
-      "color": {"value": "#17becf"},
-      "tooltip": [
-        {"field": "year", "type": "quantitative", "title": "Year"},
-        {"aggregate": "count", "type": "quantitative", "title": "No. Meteorites"}
-      ]
-    }
-  }
+    {
+      "mark": "text", "encoding": {
+      "x":{"value":600},
+      "y":{"value": 350},
+      "text":{"value":"Meteorite landings increase after moon landing"}
+      }
+      }
+  ]
+}
