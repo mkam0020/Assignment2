@@ -1,65 +1,233 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 800,
-  "height": 450,
-  "title": "Number of Landings of Meterorites Larger Than 0.5 kg",
-  "data": {
-    "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
-  },
-  "layer": [
+  "vconcat": [
     {
-      "params": [
+      "width": 700,
+      "height": 300,
+      "title": "Landing Locations For Meterorites Larger Than 0.5 Kilos",
+      "projection": {
+        "type": "equalEarth"
+      },
+      "layer": [
         {
-          "name": "yearrange",
-          "select": {"type": "point", "fields": ["end", "start"]},
-          "bind": {
-            "end": {
-              "input": "range",
-              "min": 1350,
-              "max": 2013,
-              "step": 1,
-              "name": "End Year"
-            },
-            "start": {
-              "input": "range",
-              "min": 1350,
-              "max": 2013,
-              "step": 1,
-              "name": "Start Year"
+          "data": {
+            "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m.json",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_110m_wgs84_bounding_box"
             }
           },
-          "value": [{"start": 1350, "end": 2013}]
-        }
-      ],
-      "transform": [
-        {"filter": "datum.year>yearrange_start"},
-        {"filter": "datum.year<yearrange_end"}
-      ],
-      "mark": "line",
-      "encoding": {
-        "x": {"field": "year", "type": "quantitative", "title": "Year"},
-        "y": {
-          "aggregate": "count",
-          "type": "quantitative",
-          "title": "Number of Meteorites Landings"
-        },
-        "color": {"value": "#17becf"},
-        "tooltip": [
-          {"field": "year", "type": "quantitative", "title": "Year"},
-          {
-            "aggregate": "count",
-            "type": "quantitative",
-            "title": "No. Meteorites"
+          "mark": {
+            "type": "geoshape",
+            "fill": "lightblue",
+            "tooltip": null
           }
-        ]
-      }
-    },
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m.json",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_110m_admin_0_countries"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "lightyellow",
+            "stroke": "lightgray",
+            "tooltip": null
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m.json",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_110m_graticules_30"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": null,
+            "stroke": "grey",
+            "tooltip": null
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
+          },
+          "transform": [
+            {
+              "calculate": "datum.massg/1000",
+              "as": "mass"
+            },
+            {
+              "filter": "datum.year>yearrange_start"
+            },
+            {
+              "filter": "datum.year<yearrange_end"
+            }
+          ],
+          "mark": "circle",
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "name",
+                "type": "nominal",
+                "title": "Name"
+              },
+              {
+                "field": "mass",
+                "type": "quantitative",
+                "title": "Mass (kg)"
+              },
+              {
+                "field": "year",
+                "type": "ordinal",
+                "title": "Year"
+              },
+              {
+                "field": "reclong",
+                "type": "quantitative",
+                "title": "Longitude"
+              },
+              {
+                "field": "reclat",
+                "type": "quantitative",
+                "title": "Latitude"
+              }
+            ],
+            "longitude": {
+              "field": "reclong",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "reclat",
+              "type": "quantitative"
+            },
+            "color": {
+              "field": "mass",
+              "type": "quantitative",
+              "title": "Mass (kg)",
+              "scale": {
+                "domain": [
+                  0.5,
+                  60000
+                ],
+                "type": "log"
+              }
+            },
+            "size": {
+              "field": "mass",
+              "type": "quantitative",
+              "title": "Mass (kg)",
+              "scale": {
+                "domain": [
+                  0.5,
+                  60000
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },  
     {
-      "mark": "text", "encoding": {
-      "x":{"value":600},
-      "y":{"value": 350},
-      "text":{"value":"Meteorite landings increase after moon landing"}
-      }
-      }
+      "width": 700,
+      "height": 200,
+      "title": "Number of Landings of Meterorites Larger Than 0.5 kg",
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
+          },
+          "params": [
+            {
+              "name": "yearrange",
+              "select": {
+                "type": "point",
+                "fields": [
+                  "end",
+                  "start"
+                ]
+              },
+              "bind": {
+                "end": {
+                  "input": "range",
+                  "min": 1350,
+                  "max": 2013,
+                  "step": 1,
+                  "name": "End Year"
+                },
+                "start": {
+                  "input": "range",
+                  "min": 1350,
+                  "max": 2013,
+                  "step": 1,
+                  "name": "Start Year"
+                }
+              },
+              "value": [
+                {
+                  "start": 1350,
+                  "end": 2013
+                }
+              ]
+            }
+          ],
+          "transform": [
+            {
+              "filter": "datum.year>yearrange_start"
+            },
+            {
+              "filter": "datum.year<yearrange_end"
+            }
+          ],
+          "mark": "line",
+          "encoding": {
+            "x": {
+              "field": "year",
+              "type": "quantitative",
+              "title": "Year"
+            },
+            "y": {
+              "aggregate": "count",
+              "type": "quantitative",
+              "title": "Number of Meteorites Landings"
+            },
+            "color": {
+              "value": "#17becf"
+            },
+            "tooltip": [
+              {
+                "field": "year",
+                "type": "quantitative",
+                "title": "Year"
+              },
+              {
+                "aggregate": "count",
+                "type": "quantitative",
+                "title": "No. Meteorites"
+              }
+            ]
+          }
+        },
+        {
+          "mark": "text",
+          "encoding": {
+            "x": {
+              "value": 600
+            },
+            "y": {
+              "value": 350
+            },
+            "text": {
+              "value": "Meteorite landings increase after moon landing"
+            }
+          }
+        }
+      ]
+    }
   ]
 }

@@ -3,59 +3,123 @@
   "width": 800,
   "height": 450,
   "title": "Landing Locations For Meterorites Larger Than 0.5 Kilos",
-  "projection": {"type": "equalEarth"},
+  "projection": {
+    "type": "equalEarth"
+  },
   "layer": [
     {
       "data": {
         "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m.json",
-        "format": {"type": "topojson", "feature": "ne_110m_wgs84_bounding_box"}
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_wgs84_bounding_box"
+        }
       },
-      "mark": {"type": "geoshape", "fill":"lightblue", "tooltip":null}
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightblue",
+        "tooltip": null
+      }
     },
     {
       "data": {
         "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m.json",
-        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_admin_0_countries"
+        }
       },
-      "mark": {"type": "geoshape", "fill": "lightyellow", "stroke": "lightgray", "tooltip":null}
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightyellow",
+        "stroke": "lightgray",
+        "tooltip": null
+      }
     },
     {
       "data": {
         "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m.json",
-        "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+        "format": {
+          "type": "topojson",
+          "feature": "ne_110m_graticules_30"
+        }
       },
-      "mark": {"type": "geoshape", "fill": null, "stroke": "grey", "tooltip":null}
+      "mark": {
+        "type": "geoshape",
+        "fill": null,
+        "stroke": "grey",
+        "tooltip": null
+      }
     },
-
     {
       "data": {
         "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
       },
-            "transform": [
-        {"calculate":"datum.massg/1000", "as": "mass"}
-            ],
+      "transform": [
+        {
+          "calculate": "datum.massg/1000",
+          "as": "mass"
+        }
+      ],
       "mark": "circle",
       "encoding": {
         "tooltip": [
-          {"field": "name","type":"nominal","title": "Name"},
-          {"field": "mass","type": "quantitative", "title": "Mass (kg)"},
-          {"field": "year", "type": "ordinal", "title": "Year"},
-          {"field": "reclong", "type": "quantitative", "title": "Longitude"},
-          {"field": "reclat", "type": "quantitative", "title": "Latitude"}
+          {
+            "field": "name",
+            "type": "nominal",
+            "title": "Name"
+          },
+          {
+            "field": "mass",
+            "type": "quantitative",
+            "title": "Mass (kg)"
+          },
+          {
+            "field": "year",
+            "type": "ordinal",
+            "title": "Year"
+          },
+          {
+            "field": "reclong",
+            "type": "quantitative",
+            "title": "Longitude"
+          },
+          {
+            "field": "reclat",
+            "type": "quantitative",
+            "title": "Latitude"
+          }
         ],
-        "longitude": {"field": "reclong", "type": "quantitative"},
-        "latitude": {"field": "reclat", "type": "quantitative"},
+        "longitude": {
+          "field": "reclong",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "reclat",
+          "type": "quantitative"
+        },
         "color": {
           "field": "mass",
           "type": "quantitative",
           "title": "Mass (kg)",
-          "scale": {"domain":[0.5,60000],"type": "log"}
+          "scale": {
+            "domain": [
+              0.5,
+              60000
+            ],
+            "type": "log"
+          }
         },
-        "size":{
+        "size": {
           "field": "mass",
           "type": "quantitative",
           "title": "Mass (kg)",
-          "scale": {"domain":[0.5,60000]}
+          "scale": {
+            "domain": [
+              0.5,
+              60000
+            ]
+          }
         }
       }
     }
