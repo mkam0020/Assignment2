@@ -53,11 +53,11 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
+        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings%20(1).csv"
       },
       "transform": [
         {
-          "calculate": "datum.massg/1000",
+          "calculate": "datum['mass (g)']/1000",
           "as": "mass"
         }
       ],

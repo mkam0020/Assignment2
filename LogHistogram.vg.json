@@ -1,0 +1,64 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Number of Metorites",
+  "width":"container",
+  "height": 300,
+  "data": {
+    "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings%20(2).csv"
+  },
+  "transform": [
+    {
+      "calculate": "datum['mass (g)']/1000",
+      "as": "mass"
+    },
+    {
+      "calculate": "log(datum.mass)/log(10)",
+      "as": "log_mass"
+    },
+    {
+      "bin": true,
+      "field": "log_mass",
+      "as": "bin_log_mass"
+    },
+    {
+      "calculate": "pow(10, datum.bin_log_mass)",
+      "as": "mass1"
+    },
+    {
+      "calculate": "pow(10, datum.bin_log_mass_end)",
+      "as": "mass2"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "binSpacing": 100
+  },
+  "encoding": {
+    "x": {
+      "field": "mass1",
+      "title": "Mass (kg)"
+    },
+    "x2": {
+      "field": "mass2"
+    },
+    "y": {
+      "aggregate": "count",
+      "title": "Number of Meteorites"
+    },
+    "tooltip": {
+      "aggregate": "count",
+      "field": "mass"
+    },
+    "color": {
+      "value": "#17becf"
+    }
+  },
+  "background": "#d6f9fe",
+  "config": {
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  }
+}

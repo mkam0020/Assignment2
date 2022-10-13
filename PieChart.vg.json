@@ -1,0 +1,47 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": "container",
+  "padding": -1,
+  "autosize": "pad",
+  "title": "Type of Meteorites",
+  "data": {
+    "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ClassCount.csv"
+  },
+  "encoding": {
+        "theta": {"field": "classcount", "type": "quantitative","stack":true},
+        "color": {
+          "field": "recclass",
+          "legend": null
+          },
+        "order": {"field": "class","sort": "ascending"},
+        "tooltip": [
+          {"field": "recclass", "type": "nominal", "title": "Class"},
+          {
+            "field": "classcount",
+            "type": "quantitative",
+            "title": "No. Meteorites"
+          }
+        ]
+      },
+  "layer": [
+    {
+      "mark": {"type": "arc", "outerRadius": 120}
+      
+    },
+    {
+      "mark": {"type": "text", "radius": 145},
+      "encoding": {
+      "text": {"field": "recclass", "type": "nominal"}
+    }
+    }
+  ],
+  "background": "#d6f9fe",
+  "config": {
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  }
+}

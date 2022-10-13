@@ -2,11 +2,87 @@
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-    <script src="test_vis.js"></script>
+    <script src="vis.js"></script>
     <title>Metorite Landings</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create three equal columns that floats next to each other */
+        .column4 {
+            float: left;
+            width: 25%;
+            padding: 10px;
+            height: 300px;
+            /* Should be removed. Only for demonstration */
+        }
+        .column3 {
+            float: left;
+            width: 33.33%;
+            padding: 20px;
+            height: 300px;
+            /* Should be removed. Only for demonstration */
+        }
+
+        .middleleft, .right {
+            width: 20%;
+        }
+
+        .middleright, .left {
+            width: 30%;
+        }
+
+        /* Style the header */
+        header {
+            background-color: rgb(1, 134, 134);
+            padding: 20px;
+            text-align: center;
+            font-size: 30px;
+            color: white;
+        }
+
+        article {
+            float: left;
+            padding: 20px;
+            width: 90%;
+        }
+
+        /* Clear floats after the columns */
+        section::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        body {
+            background-color: #d6f9fe;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Meteorite Landing location and Year</h1>
-    <p>The year is either when the meteorite was seen falling from sky or when it was found on the ground</p>
-    <div id="NumLandYear"></div>
+
+    <header>
+        <h1>Meteorite Landing location and Year</h1>
+    </header>
+
+    <div class="row1">
+        <div class="column3"><p>The year is either when the meteorite was seen falling from sky or when it was found on the ground</p></div>
+        <div class="column3"><p>More Text</p></div>
+        <div class="column3"><p>More Text</p></div>
+    </div>
+    
+    <div style="width: 100%;height: 860px;" id="Main"></div>
+    <div class="row">
+        <div class="column4 left" id="LogHistogram"></div>
+        <div class="column4 middleleft">
+            <p>This Is Text</p>
+        </div>
+        <div class="column4 middleright" id="PieChart"></div>
+        <div class="column4 right">This Is More Text</div>
+    </div>
+
+
+
 </body>

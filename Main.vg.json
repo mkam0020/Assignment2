@@ -1,0 +1,313 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "vconcat": [
+    {
+      "width": "container",
+      "height": 400,
+      "title": "Landing Locations For Meterorites Larger Than 0.1 Kilos",
+      "projection": {
+        "type": "equalEarth"
+      },
+      "data": {
+        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings%20(2).csv"
+      },
+      "layer": [
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m.json",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_110m_wgs84_bounding_box"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "lightblue"
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m.json",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_110m_admin_0_countries"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": "lightyellow",
+            "stroke": "lightgray"
+          }
+        },
+        {
+          "data": {
+            "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/ne_110m.json",
+            "format": {
+              "type": "topojson",
+              "feature": "ne_110m_graticules_30"
+            }
+          },
+          "mark": {
+            "type": "geoshape",
+            "fill": null,
+            "stroke": "#dadada"
+          },
+          "params": [
+            {
+              "name": "yearrange",
+              "select": {
+                "type": "point",
+                "fields": [
+                  "end",
+                  "start"
+                ]
+              },
+              "bind": {
+                "end": {
+                  "input": "range",
+                  "min": 1750,
+                  "max": 2013,
+                  "step": 1,
+                  "name": "End Year"
+                },
+                "start": {
+                  "input": "range",
+                  "min": 1750,
+                  "max": 2013,
+                  "step": 1,
+                  "name": "Start Year"
+                }
+              },
+              "value": [
+                {
+                  "start": 1750,
+                  "end": 2013
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "transform": [
+            {
+              "calculate": "datum['mass (g)']/1000",
+              "as": "mass"
+            },
+            {
+              "filter": "year(datum.year)>=yearrange_start"
+            },
+            {
+              "filter": "year(datum.year)<=yearrange_end"
+            }
+          ],
+          
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "name",
+                "type": "nominal",
+                "title": "Name"
+              },
+              {
+                "field": "mass",
+                "type": "quantitative",
+                "title": "Mass (kg)"
+              },
+              {
+                "field": "year",
+                "type": "temporal",
+                "title": "Year",
+                "formatType": "year"
+              },
+              {
+                "field": "reclong",
+                "type": "quantitative",
+                "title": "Longitude"
+              },
+              {
+                "field": "reclat",
+                "type": "quantitative",
+                "title": "Latitude"
+              }
+            ],
+            "longitude": {
+              "field": "reclong",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "reclat",
+              "type": "quantitative"
+            }
+          },
+          "layer": [
+            {
+              "mark": "circle",
+              "encoding": {
+                "color": {
+                  "field": "mass",
+                  "type": "quantitative",
+                  "title": "Mass (kg)",
+                  "scale": {
+                    "domain": [
+                      1,
+                      60000
+                    ],
+                    "type": "log"
+                  },
+                  "legend": {
+                    "offset": -70
+                  }
+                },
+                "size": {
+                  "field": "mass",
+                  "type": "quantitative",
+                  "title": "Mass (kg)",
+                  "scale": {
+                    "domain": [
+                      1,
+                      60000
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "transform": [
+                {
+                  "window": [
+                    {
+                      "op": "rank",
+                      "as": "ranking"
+                    }
+                  ],
+                  "sort": [
+                    {
+                      "field": "mass",
+                      "order": "descending"
+                    }
+                  ]
+                },
+                {
+                  "filter": "datum.ranking == 1"
+                },
+                {
+                  "calculate": "'The Largest Meteroite found; in the selected period is; ' + datum.name + ' which is ' + datum.mass + 'kg'",
+                  "as": "text_annotation_raw"
+                },
+                {
+                  "calculate": "split(datum.text_annotation_raw, ';')",
+                  "as": "text_annotation"
+                }
+              ],
+              "mark": {
+                "type": "text",
+                "align": "left",
+                "dx": 8,
+                "dy": -12
+              },
+              "encoding": {
+                "text": {
+                  "field": "text_annotation"
+                },
+                "color": {
+                  "value": "black"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": "container",
+      "height": 300,
+      "title": "Number of Landings of Meterorites Larger Than 0.1 kg",
+      "data": {
+        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/NumMeteorsYear.csv"
+      },
+      "transform": [
+        {
+          "filter": "year(datum.year)>=yearrange_start"
+        },
+        {
+          "filter": "year(datum.year)<=yearrange_end"
+        }
+      ],
+      "layer": [
+        {
+          "mark": "line",
+          "encoding": {
+            "x": {
+              "timeUnit": "year",
+              "field": "year",
+              "type": "temporal",
+              "title": "Year"
+            },
+            "y": {
+              "field": "count",
+              "type": "quantitative",
+              "title": "Number of Meteorites Landings"
+            },
+            "color": {
+              "value": "#17becf"
+            },
+            "tooltip": [
+              {
+                "field": "year",
+                "type": "temporal",
+                "formatType": "year",
+                "title": "Year"
+              },
+              {
+                "field": "count",
+                "type": "quantitative",
+                "title": "No. Meteorites"
+              }
+            ]
+          }
+        },
+        {
+          "transform": [
+            {"aggregate": [{
+              "op": "sum",
+              "field": "count",
+              "as": "totalcount"
+            }]},
+            {"calculate": "'The Number of Meteroites in; this selection is ' + datum.totalcount", "as": "text_count_raw"},
+            {
+                  "calculate": "split(datum.text_count_raw, ';')",
+                  "as": "text_count"
+                }
+          ],
+          "mark": {"type":"text","font": "arial"},
+          "encoding": {
+            "text": {"field": "text_count"},
+            "x": {"value": 85},
+            "y": {"value": 20}
+
+          }
+        },
+        {
+          "transform": [
+            {"filter": "year(datum.year)==1959"}
+          ],
+          "mark": {"type":"text","font": "arial"},
+          "encoding": {
+            "text": {
+              "value": ["The amount of meteorites that", "have been found Has increased", "since NASA was founded in 1959"]
+            },
+            "x": {"field": "year","type": "temporal","timeUnit":"year"}
+          }
+        }
+      ]
+    }
+  ],
+  "background": "#d6f9fe",
+  "config": {
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  }
+}
