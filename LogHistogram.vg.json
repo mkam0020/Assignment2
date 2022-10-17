@@ -2,7 +2,6 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {"text":"Number of Metorites","font": "arial","fontSize": 18},
   "width":"container",
-  "height": 300,
   "data": {
     "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings%20(2).csv"
   },

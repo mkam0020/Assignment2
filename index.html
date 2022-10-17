@@ -3,36 +3,23 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
     <script src="vis.js"></script>
-    <title>Metorite Landings</title>
+    <title>Meteorite Landings</title>
     <style>
         * {
             box-sizing: border-box;
         }
-
-        /* Create three equal columns that floats next to each other */
         .column4 {
             float: left;
             width: 25%;
-            padding: 10px;
-            height: 450px;
-            /* Should be removed. Only for demonstration */
+            padding: 20px;
+            height: 350;
         }
         .column3 {
             float: left;
             width: 33.33%;
             padding: 20px;
-            /* Should be removed. Only for demonstration */
         }
 
-        .middleleft, .right {
-            width: 22%;
-        }
-
-        .middleright, .left {
-            width: 28%;
-        }
-
-        /* Style the header */
         header {
             background-color: rgb(1, 134, 134);
             padding: 20px;
@@ -41,11 +28,6 @@
             color: white;
         }
 
-        article {
-            float: left;
-            padding: 20px;
-            width: 90%;
-        }
         body {
             background-color: #d6f9fe;
         }
@@ -61,7 +43,7 @@
 <body>
 
     <header>
-        <h1>Meteorite Landing location and Year</h1>
+        <h1>Meteorite Landing Location And Year Found</h1>
     </header>
 
     <div class="row1">
@@ -77,20 +59,22 @@
         </p></div>
     </div>
     
-    <div style="width: 97%;height: 1050px;padding-left: 15px;" id="Main"></div>
+    <div style="width: 98%;height: 1050px;padding-left: 15px;" id="Main"></div>
     <div class="row">
-        <div class="column4 left" id="LogHistogram"></div>
-        <div class="column4 middleleft">
+        <div class="column4" id="LogHistogram"></div>
+        <div class="column4">
             <p>Most meterites are smaller with 6799 meteorites smaller than 1kg as seen in chart to the left. These meteorites are still dangerous as a meteor that is 0.5 kg can go through a roof or a car windshield.
                 <br><br>
-                With only 13 meteorites being larger than 10 tons. These meteors can do a lot of damage. In 2013 a 10 ton meteor broke up in the atmosphere above russia and caused 1,491 injuries and 33 million dollars of damages. And it didn't even hit earth.
+                There is not many Meteorites above 100kg with there only being 782 out of 10571 meteorites larger than 0.1kg. This is due to meteors being broken up in earths atmosphere either geting smaller or breaking up completely.
+                <br><br>
+                With only 13 meteorites being larger than 10 tons. These meteorites can do a lot of damage. In 2013 a 10 ton meteor broke up in the atmosphere above russia and caused 1,491 injuries and 33 million dollars of damages. And it didn't even hit earth.
             </p>
         </div>
-        <div class="column4 middleright" id="PieChart"></div>
-        <div class="column4 right"><p>Meteorites are grouped into many different classes, with the more common classes shown in the pie chart to the left.
+        <div class="column4" id="PieChart"></div>
+        <div class="column4"><p>Meteorites are grouped into many different classes, with the more common classes shown in the pie chart to the left.
             The most common group of meteorites is the ordinary chondrites, this is then broken up into H, L and, LL chondrites.
             <br><br>
-            The L indiactes a low amount of iron, H indicates a high amount of iron, and LL indicates low iron and low metal. With the Numbers being a further grouping.
+            The L indiactes a low amount of iron, H indicates a high amount of iron and, LL indicates low iron and low metal. With the Numbers being a further grouping.
             <br><br>
             The amount of H and L meteors is about even with The LL being significantly less. This is due to The low metal means the iron has undergone oxidation to form Iron Oxide (FeO), as there is not much oxgen is space LL is not common 
         </p> </div>
