@@ -194,7 +194,7 @@
             "y": {
               "field": "count",
               "type": "quantitative",
-              "title": "Number of Meteorites Landings"
+              "title": "Number of Meteorites"
             },
             "color": {
               "value": "#17becf"
@@ -303,7 +303,7 @@
         "y": {
           "field": "count",
           "type": "quantitative",
-          "title": "Number of Meteorites Landings"
+          "title": "Number of Meteorites"
         },
         "color": {
           "value": "#17becf"

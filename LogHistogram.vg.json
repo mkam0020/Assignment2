@@ -29,19 +29,24 @@
     }
   ],
   "mark": {
-    "type": "bar"
+    "type": "bar",
+    "strokeWidth": 2,
+    "stroke":"#d6f9fe"
   },
   "encoding": {
     "x": {
       "field": "mass1",
-      "title": "Mass (kg)"
+      "title": "Mass (kg)",
+      "axis": {"tickCount":5}
     },
     "x2": {
       "field": "mass2"
     },
     "y": {
       "aggregate": "count",
-      "title": "Number of Meteorites"
+      "title": "Number of Meteorites",
+      "scale": {"type":"log"},
+      "axis": {"tickCount": 4,"gridOpacity":0.35}
     },
     "tooltip": {
       "aggregate": "count",
