@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Number of Metorites",
+  "title": {"text":"Number of Metorites","font": "arial","fontSize": 18},
   "width":"container",
   "height": 300,
   "data": {
@@ -30,8 +30,7 @@
     }
   ],
   "mark": {
-    "type": "bar",
-    "binSpacing": 100
+    "type": "bar"
   },
   "encoding": {
     "x": {

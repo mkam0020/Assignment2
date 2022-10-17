@@ -4,12 +4,12 @@
     {
       "width": "container",
       "height": 400,
-      "title": "Landing Locations For Meterorites Larger Than 0.1 Kilos",
+      "title": {"text":"Landing Locations For Meterorites Larger Than 0.1 Kilos","font": "arial","fontSize": 18},
       "projection": {
         "type": "equalEarth"
       },
       "data": {
-        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings%20(2).csv"
+        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/Meteorite_Landings.csv"
       },
       "layer": [
         {
@@ -22,7 +22,7 @@
           },
           "mark": {
             "type": "geoshape",
-            "fill": "lightblue"
+            "fill": "#87bce4"
           }
         },
         {
@@ -50,42 +50,8 @@
           "mark": {
             "type": "geoshape",
             "fill": null,
-            "stroke": "#dadada"
-          },
-          "params": [
-            {
-              "name": "yearrange",
-              "select": {
-                "type": "point",
-                "fields": [
-                  "end",
-                  "start"
-                ]
-              },
-              "bind": {
-                "end": {
-                  "input": "range",
-                  "min": 1750,
-                  "max": 2013,
-                  "step": 1,
-                  "name": "End Year"
-                },
-                "start": {
-                  "input": "range",
-                  "min": 1750,
-                  "max": 2013,
-                  "step": 1,
-                  "name": "Start Year"
-                }
-              },
-              "value": [
-                {
-                  "start": 1750,
-                  "end": 2013
-                }
-              ]
-            }
-          ]
+            "stroke": "lightgray"
+          }
         },
         {
           "transform": [
@@ -93,14 +59,9 @@
               "calculate": "datum['mass (g)']/1000",
               "as": "mass"
             },
-            {
-              "filter": "year(datum.year)>=yearrange_start"
-            },
-            {
-              "filter": "year(datum.year)<=yearrange_end"
-            }
+
+            {"filter": {"param": "time_brush"}}
           ],
-          
           "encoding": {
             "tooltip": [
               {
@@ -116,8 +77,8 @@
               {
                 "field": "year",
                 "type": "temporal",
-                "title": "Year",
-                "formatType": "year"
+                "timeUnit": "year",
+                "title": "Year"
               },
               {
                 "field": "reclong",
@@ -148,26 +109,17 @@
                   "type": "quantitative",
                   "title": "Mass (kg)",
                   "scale": {
-                    "domain": [
-                      1,
-                      60000
-                    ],
-                    "type": "log"
+                    "type": "log",
+                    "scheme": "blues"
                   },
                   "legend": {
-                    "offset": -70
+                    "offset": -150
                   }
                 },
                 "size": {
                   "field": "mass",
                   "type": "quantitative",
-                  "title": "Mass (kg)",
-                  "scale": {
-                    "domain": [
-                      1,
-                      60000
-                    ]
-                  }
+                  "title": "Mass (kg)"
                 }
               }
             },
@@ -203,7 +155,8 @@
                 "type": "text",
                 "align": "left",
                 "dx": 8,
-                "dy": -12
+                "dy": -12,
+                "font": "arial"
               },
               "encoding": {
                 "text": {
@@ -221,20 +174,15 @@
     {
       "width": "container",
       "height": 300,
-      "title": "Number of Landings of Meterorites Larger Than 0.1 kg",
+      "title": {"text":"Number of Meterorites Landings Over Time","font": "arial","fontSize": 18},
       "data": {
         "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/NumMeteorsYear.csv"
       },
-      "transform": [
-        {
-          "filter": "year(datum.year)>=yearrange_start"
-        },
-        {
-          "filter": "year(datum.year)<=yearrange_end"
-        }
-      ],
       "layer": [
         {
+          "transform": [
+            {"filter": {"param": "time_brush"}}
+          ],
           "mark": "line",
           "encoding": {
             "x": {
@@ -268,38 +216,112 @@
         },
         {
           "transform": [
-            {"aggregate": [{
-              "op": "sum",
-              "field": "count",
-              "as": "totalcount"
-            }]},
-            {"calculate": "'The Number of Meteroites in; this selection is ' + datum.totalcount", "as": "text_count_raw"},
+            {"filter": {"param": "time_brush"}},
             {
-                  "calculate": "split(datum.text_count_raw, ';')",
-                  "as": "text_count"
+              "aggregate": [
+                {
+                  "op": "sum",
+                  "field": "count",
+                  "as": "totalcount"
                 }
+              ]
+            },
+            {
+              "calculate": "'The Number of Meteroites in; this selection is ' + datum.totalcount",
+              "as": "text_count_raw"
+            },
+            {
+              "calculate": "split(datum.text_count_raw, ';')",
+              "as": "text_count"
+            }
           ],
-          "mark": {"type":"text","font": "arial"},
+          "mark": {
+            "type": "text",
+            "font": "arial"
+          },
           "encoding": {
-            "text": {"field": "text_count"},
-            "x": {"value": 85},
-            "y": {"value": 20}
-
+            "text": {
+              "field": "text_count"
+            },
+            "x": {
+              "value": 85
+            },
+            "y": {
+              "value": 20
+            }
           }
         },
         {
           "transform": [
-            {"filter": "year(datum.year)==1959"}
+            {"filter": {"param": "time_brush"}},
+            {
+              "filter": "year(datum.year)==1959"
+            }
           ],
-          "mark": {"type":"text","font": "arial"},
+          "mark": {
+            "type": "text",
+            "font": "arial"
+          },
           "encoding": {
             "text": {
-              "value": ["The amount of meteorites that", "have been found Has increased", "since NASA was founded in 1959"]
+              "value": [
+                "The amount of meteorites that",
+                "have been found Has increased",
+                "since NASA was founded in 1959"
+              ]
             },
-            "x": {"field": "year","type": "temporal","timeUnit":"year"}
+            "x": {
+              "field": "year",
+              "type": "temporal",
+              "timeUnit": "year"
+            }
           }
         }
       ]
+    },
+    {
+      "title": {"text":"Select Time Period On Graph Below","font": "arial"},
+      "width": "container",
+      "height": 100,
+      "mark": "line",
+      "data": {
+        "url": "https://raw.githubusercontent.com/mkam0020/Assignment2/main/NumMeteorsYear.csv"
+      },
+      "params": [
+        {
+          "name": "time_brush",
+          "select": {"type": "interval", "encodings": ["x"]}
+        }
+      ],
+      "encoding": {
+        "x": {
+          "timeUnit": "year",
+          "field": "year",
+          "type": "temporal",
+          "title": "Year"
+        },
+        "y": {
+          "field": "count",
+          "type": "quantitative",
+          "title": "Number of Meteorites Landings"
+        },
+        "color": {
+          "value": "#17becf"
+        },
+        "tooltip": [
+          {
+            "field": "year",
+            "type": "temporal",
+            "formatType": "year",
+            "title": "Year"
+          },
+          {
+            "field": "count",
+            "type": "quantitative",
+            "title": "No. Meteorites"
+          }
+        ]
+      }
     }
   ],
   "background": "#d6f9fe",
